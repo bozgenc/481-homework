@@ -1,11 +1,26 @@
 <title>My application deployed automatically</title>
   <h1>Hello, World!</h1>
-    Result is {{result}}
+  <h3>Bu sayfada sağdaki alana girilen sayı solda alt alta girilen sayıların için de var mı yok mu ona bakılır. </h3>
+  <h3>
+  Ayrıca kullanıcı seçimine göre en büyük çift ya da tek sayı ile birlikte asal ya da asal olmayan sayılar sıralanır. 
+  </h3>
+
+    {{result}}
 
 
   <form action="compute" method="post">
         <textarea name="input1" rows="10" cols="30"></textarea>
         <textarea name="input2" rows="10" cols="30"></textarea>
+        <br/>
+        <input type = radio id = "even" name = "evenOrMax" value = "even">
+        <label for="even">Even</label>
+        <input type = radio id = "odd" name = "evenOrMax" value = "odd">
+        <label for="odd">Odd</label>
+        <br>
+        <input type = radio id = "prime" name = "primeOrNot" value = "prime">
+        <label for="prime">Prime</label>
+        <input type = radio id = "notPrime" name = "primeOrNot" value = "notPrime">
+        <label for="notPrime">Not Prime</label>
         <br>
         <input type="submit">
   </form>

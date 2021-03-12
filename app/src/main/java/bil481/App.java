@@ -31,6 +31,77 @@ public class App
       return false;
     }
 
+    public static String analyzeList(ArrayList<Integer> list, int first, String oddEven, String primeOrNot) {
+        String result = "";
+        int max = -9999;
+        String primeList = "";
+        String notPrimeList = "";
+        String maxOdd = "";
+        String maxEven = "";
+
+        if (oddEven.equals("even")) {
+            for(int i : list) {
+                if(i % 2 == 0) {
+                    if(i > max)
+                    max = i;  
+                }  
+            }
+            maxEven = "En büyük çift sayı: " + max + " \n";
+        }
+        else if(oddEven.equals("odd")) {
+            for(int i : list) {
+                if(i % 2 != 0){
+                    if(i > max)
+                        max = i;
+                }
+            }
+            maxOdd = "En büyük tek sayı:" + max + "\n";
+        }
+
+        if(primeOrNot.equals("prime")) {
+            primeList = "Asal olan sayılar: ";
+            for(int i: list) {
+                if(isPrime(i)) {
+                    primeList += i + ",";
+                }
+            }
+            primeList += "\n";
+        }
+
+        else if(primeOrNot.equals("notPrime")) {
+            notPrimeList = "Asal olmayan sayılar: ";
+            for(int i : list) {
+                if(!isPrime(i))
+                    notPrimeList += i + ",";
+            }
+            notPrimeList += "\n";
+        }
+
+        boolean contain = search(list, first);
+        if(contain)
+            result = "Listede " + first + " sayısı mevcut\n";
+        else
+            result = "Listede " + first + " sayısı mevcut değil\n";  
+        
+        String finalStr = result + maxEven + maxOdd + primeList + notPrimeList;
+        return finalStr;
+    }
+
+
+    private static boolean isPrime(int num) {
+        int factor = 0;
+        for(int i = 1; i <= num; i++) {
+            if(num % i == 0)
+                factor++;
+        }
+
+        if(factor == 2)
+            return true;
+        else
+            return false;
+    }
+
+
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
 
@@ -63,9 +134,15 @@ public class App
           String input2 = req.queryParams("input2").replaceAll("\\s","");
           int input2AsInt = Integer.parseInt(input2);
 
-          boolean result = App.search(inputList, input2AsInt);
+          String input3 = req.queryParams("evenOrMax");
+          String input4 = req.queryParams("primeOrNot");
 
-          Map<String, Boolean> map = new HashMap<String, Boolean>();
+          System.out.println(input3);
+          System.out.println(input4);
+
+          String result = App.analyzeList(inputList, input2AsInt, input3, input4);
+
+          Map<String, String> map = new HashMap<String, String>();
           map.put("result", result);
           return new ModelAndView(map, "compute.mustache");
         }, new MustacheTemplateEngine());
