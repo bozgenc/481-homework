@@ -34,11 +34,11 @@ public class App
     public static void main(String[] args) {
         port(getHerokuAssignedPort());
 
-        Logger logger = LogManager.getLogger(App.class);
+        Logger logger = Logger.getLogger(App.class.getName());
 
         int port = Integer.parseInt(System.getenv("PORT"));
         port(port);
-        //logger.error("Current port number:" + port);
+        logger.error("Current port number:" + port);
 
 
         get("/", (req, res) -> "Hello, World");
