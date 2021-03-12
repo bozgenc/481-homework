@@ -40,21 +40,11 @@ public class App
         String maxEven = "";
 
         if (oddEven.equals("even")) {
-            for(int i : list) {
-                if(i % 2 == 0) {
-                    if(i > max)
-                    max = i;  
-                }  
-            }
+            max = findMaxEven(list);
             maxEven = "En büyük çift sayı: " + max + " \n";
         }
         else if(oddEven.equals("odd")) {
-            for(int i : list) {
-                if(i % 2 != 0){
-                    if(i > max)
-                        max = i;
-                }
-            }
+            max = findMaxOdd(list);
             maxOdd = "En büyük tek sayı:" + max + "\n";
         }
 
@@ -87,8 +77,30 @@ public class App
         return finalStr;
     }
 
+    public static int findMaxEven(ArrayList<Integer> list){
+        int max = -9999;
+        for(int i : list) {
+            if(i % 2 == 0) {
+                if(i > max)
+                max = i;  
+            }  
+        }
+        return max;
+    }
 
-    private static boolean isPrime(int num) {
+    public static int findMaxOdd(ArrayList<Integer> list) {
+        int max = -9999;
+        for(int i : list) {
+            if(i % 2 != 0) {
+                if(i > max)
+                max = i;  
+            }  
+        }
+        return max;
+    }
+
+
+    public static boolean isPrime(int num) {
         int factor = 0;
         for(int i = 1; i <= num; i++) {
             if(num % i == 0)

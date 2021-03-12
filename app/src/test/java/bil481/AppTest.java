@@ -4,6 +4,9 @@
 package bil481;
 
 import org.junit.jupiter.api.Test;
+
+import jdk.jfr.Timestamp;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,5 +44,33 @@ class AppTest {
     public void testNull() {
       assertFalse(App.search(null, 1));
     }
+
+    @Test
+    public void testPrime() { // sayı asal mı değil mi kontrolü
+        assertTrue(App.isPrime(2));
+    }
+
+    @Test
+    public void testPrime2() {
+        assertFalse(App.isPrime(8));
+    }
+
+    @Test
+    public void testMaxEven() { // bir listteki en büyük çift sayı
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1,2,10,8));
+        assertEquals(App.findMaxEven(array), 10);
+    }
+
+    @Test
+    public void testMaxOdd() { // bir listteki en büyük tek sayı
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(6,8,10,17));
+        assertEquals(App.findMaxOdd(array), 17);
+    }
+
+    @Test
+    public void testMaxOdd2() {
+        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1,3,5,7,10,200));
+        assertEquals(App.findMaxOdd(array), 7);
+    } 
 
 }
